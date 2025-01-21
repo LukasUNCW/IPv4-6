@@ -7,7 +7,7 @@ def ipv6_to_binary(ipv6):
     binary_ipv6 = bin(int(ipv6_obj))[2:].zfill(128) # Convert to binary and ensure it's 128 bits long
 
     # Format the binary IPv6 in groups of 16 bits for readability
-    binary_ipv6_formatted = ':'.join([binary_ipv6[i:i+16] for i in range(0, len(binary_ipv6)), 16])
+    binary_ipv6_formatted = ':'.join([binary_ipv6[i:i+16] for i in range(0, len(binary_ipv6), 16)])
     
     return binary_ipv6_formatted
 
