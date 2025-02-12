@@ -2,9 +2,7 @@
  
 These programs translate the associated IP address format into its binary representation. 
 
-In order for the IPv6 file to run, the user must run the following command, "pip install ipaddress",
-
-inside their IDE terminal to install the 'ipaddress' module.
+In order for the IPv6 file to run, the user must run the following command, "pip install ipaddress", inside their IDE terminal to install the 'ipaddress' module.
 
 Example IPv4 address: 192.168.0.1
 Example IPv6 address: 2001:db8:3333:4444:5555:6666:7777:8888
