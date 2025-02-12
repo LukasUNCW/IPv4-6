@@ -1,19 +1,38 @@
+import ipaddress
+
 def ipv4_to_binary(ipv4):
-# Split the IPv4 address into its four octets
-    octets = ipv4.split('.')
-    # Convert each octet to binary and ensure it's 8 bits long (pad with zeros if necessary)
-    binary_octets = [format (int(octet), '08b') for octet in octets]
-    # Join the binary octets with a dot for readability
-    binary_ipv4 = ' '.join (binary_octets)
+    try:
+        octets = ipv4.split('.')
+        binary_octets = [format(int(octet), '08b') for octet in octets]
+        binary_ipv4 = ' '.join(binary_octets)
+        return binary_ipv4
+    except ValueError:
+        return "Invalid IPv4 address."
 
-    return binary_ipv4
+def ipv6_to_binary(ipv6):
+    try:
+        ipv6_obj = ipaddress.IPv6Address(ipv6)
+        binary_ipv6 = bin(int(ipv6_obj))[2:].zfill(128) 
+        binary_ipv6_formatted = ':'.join([binary_ipv6[i:i+16] for i in range(0, len(binary_ipv6), 16)])
+        return binary_ipv6_formatted
+    except ipaddress.AddressValueError:
+        return "Invalid IPv6 address."
 
-# Get IPv4 address input from the user
-ipv4_address = input("Enter an IPv4 address: ")
+def choice():
+    version = input("Would you like to translate an IPv4 or IPv6 address? ").strip().lower()
 
-# Convert the input IPv4 address to binary
-binary_representation = ipv4_to_binary(ipv4_address)
+    if version == "ipv4":
+        ipv4_address = input("Enter an IPv4 address: ").strip()
+        print(f"IPv4 Address: {ipv4_address}")
+        print(f"Binary Representation: {ipv4_to_binary(ipv4_address)}")
 
-# Display the result
-print(f"IPv4 Address: {ipv4_address}")
-print(f"Binary Representation: {binary_representation}")
+    elif version == "ipv6":
+        ipv6_address = input("Enter an IPv6 address: ").strip()
+        print(f"IPv6 Address: {ipv6_address}")
+        print(f"Binary Representation: {ipv6_to_binary(ipv6_address)}")
+
+    else:
+        print("Invalid choice. Please enter either 'IPv4' or 'IPv6'.")
+        choice()
+
+choice()
